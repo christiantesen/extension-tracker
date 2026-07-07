@@ -285,6 +285,64 @@ function bindEvents() {
   });
 
   document.getElementById('btn-add-chars').addEventListener('click', onAddCharacters);
+
+  // Importar / Exportar
+  document.getElementById('btn-export').addEventListener('click', onExportLists);
+  document.getElementById('btn-import').addEventListener('click', () => {
+    document.getElementById('import-file').click();
+  });
+  document.getElementById('import-file').addEventListener('change', handleImportFile);
+}
+
+// ============================================================
+// IMPORT / EXPORT
+// ============================================================
+function onExportLists() {
+  if (lists.length === 0) {
+    alert('No hay listas para exportar.');
+    return;
+  }
+  
+  const dataStr = JSON.stringify({ version: 1, lists: lists }, null, 2);
+  const blob = new Blob([dataStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `mu_tracker_listas_${new Date().toISOString().split('T')[0]}.json`;
+  a.click();
+  
+  URL.revokeObjectURL(url);
+}
+
+function handleImportFile(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = async (ev) => {
+    try {
+      const data = JSON.parse(ev.target.result);
+      if (!data.lists || !Array.isArray(data.lists)) {
+        throw new Error('Formato de archivo inválido.');
+      }
+      
+      const confirmMsg = `¿Deseas reemplazar tus listas actuales por las ${data.lists.length} listas del archivo?\n\n- OK = Reemplazar todo\n- Cancelar = Cancelar importación`;
+      if (confirm(confirmMsg)) {
+        lists = data.lists;
+        await saveData();
+        selectedListId = lists.length > 0 ? lists[0].id : null;
+        renderAll();
+        alert('¡Listas importadas correctamente!');
+      }
+    } catch (err) {
+      alert('Error al importar: ' + err.message);
+    } finally {
+      // Limpiar el input para permitir importar el mismo archivo de nuevo si se desea
+      e.target.value = '';
+    }
+  };
+  reader.readAsText(file);
 }
 
 // ============================================================

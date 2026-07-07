@@ -215,6 +215,33 @@ html.panel-mode .btn-header-icon { display: none; }
 }
 .btn-new-list:hover { border-color: var(--gold-dim); color: var(--gold); }
 
+.list-bar-actions {
+  display: flex;
+  gap: 3px;
+  margin-left: 2px;
+  padding-left: 5px;
+  border-left: 1px solid var(--border);
+}
+
+.btn-bar-action {
+  width: 24px;
+  height: 24px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-dim);
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+}
+.btn-bar-action:hover {
+  background: var(--bg-card);
+  border-color: var(--border-mid);
+  color: var(--text-bright);
+}
+
 /* ================================================================
    VISTA PRINCIPAL (scrollable)
    ================================================================ */

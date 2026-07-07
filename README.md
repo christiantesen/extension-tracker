@@ -1,52 +1,74 @@
 # ⚔ MU Tracker — Extensión para Chrome / Brave
 
-Extensión de navegador para hacer tracking de personajes en **Nexus Fast** (fast.nexus-mu.com). Muestra el **mapa** y **coordenadas (X, Y)** de cada personaje en tiempo real.
+Extensión de navegador para hacer **tracking de personajes** en **Nexus Fast** (`fast.nexus-mu.com`).  
+Muestra el **mapa** y **coordenadas (X, Y)** de cada personaje, con polling automático cada 10 minutos.
 
 ---
 
 ## 📦 Instalación
 
-### Paso 1 — Cargar en Chrome o Brave
+### Opción A — Automática con `INSTALAR.bat` (recomendado)
 
-1. Abre tu navegador y ve a:
+1. Abre la carpeta `extension/`
+2. Ejecuta **`INSTALAR.bat`** como doble clic
+3. El script hará automáticamente:
+   - ✅ Copiar la extensión a una ruta permanente en tu PC
+   - ✅ Detectar Chrome o Brave
+   - ✅ Crear acceso directo **"MU Tracker"** en el Escritorio
+   - ✅ Abrir la página de extensiones del navegador
+
+4. Para **instalación permanente** (una vez, 3 clics):
+   - Ve a `chrome://extensions/`
+   - Activa **"Modo de desarrollador"** (toggle arriba derecha)
+   - Clic en **"Cargar extensión sin empaquetar"**
+   - Selecciona la carpeta que te indica el instalador:
+     ```
+     C:\Users\TU_USUARIO\AppData\Local\MUTracker\extension
+     ```
+
+> **Actualizar**: solo ejecuta `INSTALAR.bat` de nuevo. Los datos guardados no se pierden.
+
+---
+
+### Opción B — Manual
+
+1. Abre tu navegador:
    - **Chrome**: `chrome://extensions/`
    - **Brave**: `brave://extensions/`
 
 2. Activa el **Modo desarrollador** (toggle en la esquina superior derecha)
 
-3. Haz clic en **"Cargar descomprimida"** (Load unpacked)
+3. Clic en **"Cargar descomprimida"** (Load unpacked)
 
 4. Selecciona la carpeta `extension/` de este proyecto
 
-5. La extensión aparecerá en la barra de herramientas — fíjala con el ícono de piezas 🧩
+5. Fija la extensión con el ícono de piezas 🧩
 
 ---
 
 ## 🚀 Uso
 
 ### Crear una lista
-- Haz clic en **＋** en la barra de listas
-- Asigna un nombre (ej: `Enemigos`, `Rivales`, `Objetivo`)
+Haz clic en **＋** en la barra de listas y asigna un nombre (`Enemigos`, `Rivales`, etc.)
 
 ### Agregar personajes
-- Selecciona la lista
-- Haz clic en **➕ Agregar Personajes**
-- Pega uno o más links completos, uno por línea:
-  ```
-  https://fast.nexus-mu.com/rankings/character-profile/hZkWOagSsLP-jgoaBl0T6Q==/
-  https://fast.nexus-mu.com/rankings/character-profile/OTRO_UUID==/
-  ```
-- Clic en **Agregar**
+1. Selecciona la lista
+2. Haz clic en **➕ Agregar Personajes**
+3. Pega uno o más links de perfil (uno por línea):
+   ```
+   https://fast.nexus-mu.com/rankings/character-profile/hZkWOagSsLP-jgoaBl0T6Q==/
+   https://fast.nexus-mu.com/rankings/character-profile/OTRO_UUID==/
+   ```
+4. Clic en **Agregar**
 
 ### Actualizar un personaje
-- Haz clic en el botón **↻** al lado derecho de cada personaje
+Haz clic en **↻** al lado derecho de cada fila
 
 ### Activar / Desactivar una lista
-- Usa el toggle **Activa / Inactiva** en el header de la lista
-- Solo las listas **activas** son monitoreadas automáticamente cada 10 minutos
+Usa el toggle **Activa / Inactiva** — solo las listas activas se monitorean automáticamente
 
-### Notificaciones de cambio de mapa
-- Si un personaje cambia de mapa durante el polling automático, recibirás una notificación del navegador
+### Panel flotante (siempre visible)
+Haz clic en el botón **⧉** en el header del popup para abrir un panel independiente que no se cierra al hacer clic afuera
 
 ---
 
@@ -55,10 +77,11 @@ Extensión de navegador para hacer tracking de personajes en **Nexus Fast** (fas
 | Función | Detalle |
 |---|---|
 | **Polling automático** | Cada 10 minutos, solo listas activas |
-| **Refresh manual** | Unitario por personaje con botón ↻ |
+| **Refresh manual** | Unitario por personaje con botón `↻` |
 | **Datos mostrados** | Nombre, Mapa, (X, Y), Última actualización |
-| **Persistencia** | Los datos se guardan localmente en el navegador |
+| **Persistencia** | Datos guardados localmente en el navegador |
 | **Notificaciones** | Cuando un personaje cambia de mapa |
+| **Panel flotante** | Ventana separada siempre visible (`⧉`) |
 
 ---
 
@@ -66,8 +89,9 @@ Extensión de navegador para hacer tracking de personajes en **Nexus Fast** (fas
 
 ```
 extension/
+├── INSTALAR.bat       ← Instalador automático (Windows)
 ├── manifest.json      ← Configuración MV3
-├── background.js      ← Service worker (polling cada 10min)
+├── background.js      ← Service worker (polling cada 10 min)
 ├── popup.html         ← Interfaz del popup
 ├── popup.js           ← Lógica de la UI
 ├── styles/
