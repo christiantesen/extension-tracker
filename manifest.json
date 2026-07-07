@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "MU Tracker - Nexus Fast",
+  "version": "1.0.0",
+  "description": "Tracking de personajes MU Online en Nexus Fast. Monitorea mapa y coordenadas en tiempo real.",
+  "permissions": [
+    "storage",
+    "alarms",
+    "notifications",
+    "windows"
+  ],
+  "host_permissions": [
+    "https://fast.nexus-mu.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16":  "icons/icon16.png",
+      "48":  "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16":  "icons/icon16.png",
+    "48":  "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

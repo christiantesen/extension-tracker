@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>MU Tracker</title>
+  <link rel="stylesheet" href="styles/popup.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- ===================== HEADER ===================== -->
+    <header class="header">
+      <div class="header-left">
+        <span class="header-sword">⚔</span>
+        <div class="header-text">
+          <div class="header-title">MU TRACKER</div>
+          <div class="header-sub">Nexus Fast</div>
+        </div>
+      </div>
+      <div class="header-right">
+        <button id="btn-popout" class="btn-header-icon" title="Abrir panel flotante (siempre visible)">⧉</button>
+        <span id="poll-countdown" class="poll-badge" title="Próximo refresh automático">↻ --:--</span>
+      </div>
+    </header>
+
+    <!-- ================ BARRA DE LISTAS ================ -->
+    <div class="lists-bar">
+      <div id="lists-tabs" class="lists-tabs"></div>
+      <button id="btn-new-list" class="btn-new-list" title="Nueva lista">＋</button>
+    </div>
+
+    <!-- ================ VISTA PRINCIPAL ================ -->
+    <div id="main-view" class="main-view">
+
+      <!-- Sin listas -->
+      <div id="view-empty" class="view-panel hidden">
+        <div class="empty-icon">⚔</div>
+        <p class="empty-title">Sin listas de seguimiento</p>
+        <p class="empty-sub">Presiona <strong>＋</strong> para crear tu primera lista</p>
+      </div>
+
+      <!-- Vista de lista seleccionada -->
+      <div id="view-list" class="view-panel hidden">
+
+        <!-- Header de lista (sticky) -->
+        <div class="list-header" id="list-header-bar">
+          <span id="list-name-display" class="list-name-display"></span>
+          <div class="list-header-actions">
+            <span id="chars-count" class="chars-count"></span>
+            <span id="toggle-label" class="toggle-label">Activa</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="list-active-toggle">
+              <span class="slider"></span>
+            </label>
+            <button id="btn-delete-list" class="btn-icon-danger" title="Eliminar lista">🗑</button>
+          </div>
+        </div>
+
+        <!-- Cabecera de columnas -->
+        <div class="chars-col-header">
+          <span class="col-name">Personaje</span>
+          <span class="col-loc">Ubicación</span>
+          <span class="col-age">UPD</span>
+          <span class="col-acts"></span>
+        </div>
+
+        <!-- Filas de personajes -->
+        <div id="chars-list" class="chars-list"></div>
+
+        <!-- Sin personajes -->
+        <div id="no-characters" class="empty-sm hidden">
+          <p>Lista vacía — agrega personajes abajo ↓</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ================ PANEL AGREGAR ================ -->
+    <div class="add-panel" id="add-panel">
+      <button id="btn-toggle-add" class="btn-toggle-add">
+        <span>➕ Agregar Personajes</span>
+        <span id="add-chevron" class="chevron">▼</span>
+      </button>
+      <div id="add-form" class="add-form hidden">
+        <p class="add-hint">Un link por línea</p>
+        <textarea
+          id="links-textarea"
+          class="links-textarea"
+          placeholder="https://fast.nexus-mu.com/rankings/character-profile/UUID==/"
+          rows="3"
+          spellcheck="false"
+        ></textarea>
+        <div id="add-feedback" class="add-feedback hidden"></div>
+        <button id="btn-add-chars" class="btn-primary" disabled>
+          Agregar a <span id="btn-add-list-name">lista</span>
+        </button>
+      </div>
+    </div>
+
+  </div><!-- /#app -->
+
+  <!-- =========== MODAL NUEVA LISTA =========== -->
+  <div id="modal-overlay" class="modal-overlay hidden">
+    <div class="modal">
+      <h2 class="modal-title">Nueva Lista</h2>
+      <input type="text" id="new-list-name-input" class="modal-input"
+        placeholder="Ej: Enemigos, Rivales..." maxlength="30" autocomplete="off">
+      <div class="modal-actions">
+        <button id="btn-cancel-modal" class="btn-secondary">Cancelar</button>
+        <button id="btn-confirm-modal" class="btn-primary">Crear</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
